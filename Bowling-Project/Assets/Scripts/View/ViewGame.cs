@@ -4,54 +4,51 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using View;
 
-public class ViewGame : MonoBehaviour
+public class ViewGame : MonoBehaviour, IView
 {
-    private TMP_InputField _inputField;
+    [SerializeField]private TMP_InputField _inputField;
+    [SerializeField]private TextMeshProUGUI _errorText;
+    [SerializeField] private GameObject InputUI;
 
-    private Button _shootButton;
-    private ShootButton _shootButtonScript;
+    [SerializeField] private Ball ball;
 
+    private GamePresenter _gamePresenter;
+
+    [SerializeField] private GameObject totalScoreObj;
+    [SerializeField] private TextMeshProUGUI totalScoreText;
+    
     private void Start()
     {
-        _shootButtonScript = _shootButton.GetComponent<ShootButton>();
-        _shootButtonScript.OnShoot += ValidateValues;
-
+        _gamePresenter = new GamePresenter(this);
+        ball.onReachDestination += _gamePresenter.TotalScore;
     }
 
-    private void ValidateValues()
+
+    public void ValidateValues(string error)
     {
-        bool haveText = _inputField.text.Length > 0;
-        bool correctString = _inputField.text.Contains(",");
-
-        bool correctNumbers;
-        string[] values = _inputField.text.Split(',');
-
-        int[] numbers = new int[10];
-
-
-        for (int i = 0; i < values.Length; i++)
+        if (error.Length > 0)
         {
-            int n;
-            correctNumbers = int.TryParse(values[i], out n);
-
-            if (correctNumbers)
-            {
-                numbers[i] = n;
-            }
-            else
-            {
-                break;
-            }
+            _errorText.text = error;
         }
-        
-        
-        
-        
+        else
+        {
+            InputUI.SetActive(false);
+            ball.Shoot();
+        }
+
+    }
+    
+    public void TotalScore(int total)
+    {
+        totalScoreObj.SetActive(true);
+        totalScoreText.text = total.ToString();
     }
 
-    private void OnDisable()
+    public void Shoot()
     {
-        _shootButtonScript.OnShoot -= ValidateValues;
+        _gamePresenter.Validate(_inputField.text);
     }
+
 }

@@ -1,18 +1,19 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public Action onReachDestination;
+     
+    public void Shoot()
     {
-        
+        transform.LeanMoveLocalY(779, 3).setEaseInBack().setOnComplete(End);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void End()
     {
-        
+        onReachDestination?.Invoke();
     }
 }
