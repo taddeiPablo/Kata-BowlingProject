@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using View;
 
@@ -51,4 +52,8 @@ public class ViewGame : MonoBehaviour, IView
         _gamePresenter.Validate(_inputField.text);
     }
 
+    public void ResetGame()
+    {
+        SceneManager.LoadScene("Game");
+    }
 }
