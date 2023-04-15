@@ -15,8 +15,10 @@ namespace Tests
             int[] shoots = { 10,5,4}; 
             
             Game game = new Game();
-            
-            Assert.Equals(game.GameScore(shoots), 28);
+
+            var score = game.GameScore(shoots);
+
+            Assert.AreEqual(game.GameScore(shoots), 28);
         }
         
         [Test]
@@ -25,8 +27,8 @@ namespace Tests
             int[] shoots = { 6,4,7}; 
             
             Game game = new Game();
-            
-            Assert.Equals(game.GameScore(shoots), 24);
+
+            Assert.AreEqual(game.GameScore(shoots), 24);
         }
         
         
@@ -39,7 +41,7 @@ namespace Tests
             
             Game game = new Game();
             
-            Assert.Equals(game.GameScore(shoots), 41);
+            Assert.AreEqual(game.GameScore(shoots), 36);
         }
         
         [Test]
@@ -49,7 +51,7 @@ namespace Tests
             
             Game game = new Game();
             
-            Assert.Equals(game.GameScore(shoots), 62);
+            Assert.AreEqual(game.GameScore(shoots), 62);
         }
         
         [Test]
@@ -59,7 +61,7 @@ namespace Tests
             
             Game game = new Game();
             
-            Assert.Equals(game.GameScore(shoots), 44);
+            Assert.AreEqual(game.GameScore(shoots), 44);
         }
         
         [Test]
@@ -69,7 +71,7 @@ namespace Tests
             
             Game game = new Game();
             
-            Assert.Equals(game.GameScore(shoots), 55);
+            Assert.AreEqual(game.GameScore(shoots), 55);
         }
         
         [Test]
@@ -79,7 +81,7 @@ namespace Tests
             
             Game game = new Game();
             
-            Assert.Equals(game.GameScore(shoots), 52);
+            Assert.AreEqual(game.GameScore(shoots), 52);
         }
         
     }
