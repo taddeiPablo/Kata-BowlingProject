@@ -7,6 +7,20 @@ public class Game
     
     public int GameScore(int[] gameShoots)
     {
-        return 0;
+        int finalScore = 0;
+        
+        for (int i = 0; i < gameShoots.Length; i++)
+        {
+            if (gameShoots[i] == 10)
+            {
+                finalScore += gameShoots[i] + gameShoots[i+1] + gameShoots[i+2];
+                continue;
+            }
+
+            finalScore += gameShoots[i];
+        }
+        
+        
+        return finalScore;
     }
 }
